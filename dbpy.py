@@ -14,23 +14,75 @@ print('3 :DELETE EXISTING USERNAME AND PASSWORD')
 ans = int(input('PLEASE SELECT AN OPTION:  '))
 
 if ans == 1:
+
 	#create a new user (need to check bring the search function here)
-	print('Create a new user')
+	print('CREATE A NEW ACCOUNT')
+	uname =input('ENTER USERNAME:  ')
+	passord =input('ENTER PASSWORD: ')
 
-	uid = 7
-	uname = 'gucci'
-	passord = 'gang'
+	search = uname
+	#search if value exists in the database
+	#search = "njehfnga" #enter search value here(need to change to user input)
 
-	
 
-	sqlinsert = "INSERT INTO username_password(UserID,user_Name,password) VALUES (%s , %s , %s)" #
-	myCursor.execute(sqlinsert, (uid ,uname, passord))
-	conn.commit()
-	conn.close()
+	sqlSEARCH = "SELECT UserID,user_Name , Password FROM `userName_Password` WHERE user_Name like  %s "  
+
+
+	val = myCursor.execute(sqlSEARCH,search)
+
+	if val == 1:
+		print('USERNAME ALREADY EXISTS')
+
+	else:
+		print('value was not found ')
+		print('name has been accepted')
+
+		#insrt to db area
+		sqlinsert = "INSERT INTO username_password(user_Name,password) VALUES ( %s , %s)" #
+		myCursor.execute(sqlinsert, (uname, passord))
+		conn.commit()
+		conn.close()
 
 
 elif ans ==2:
-	print('NOT YET WRITTEN')
+	print('UPDATE EXISTING USERNAME AND PASSWORD\n')
+	print('1) CHANGE USERNAME')
+	print('2) CHANGE PASSWORD')
+
+	choice = input('ENTER YOUR CHOICE 1/2')
+	if choice == 1:
+
+		search = input('ENTER YOUR USERNAME')
+	#search if value exists in the database
+	#search = "njehfnga" #enter search value here(need to change to user input)
+
+
+		sqlSEARCH = "SELECT UserID,user_Name , Password FROM `userName_Password` WHERE user_Name like  %s "  
+
+
+		val = myCursor.execute(sqlSEARCH,search)
+
+		if val == 1:
+			print('value found')
+			newname = input('ENTER NEW USERNAME: ')
+
+
+			################################################################################we are here fin a way to search the username given return the id and update from there
+			#because you can onlyupdate using the individuals id(primary key)
+# 			UPDATE username_password
+# SET User_Name = 'AlfredSchmidt'
+# WHERE UserID = 1;
+
+
+
+		else:
+			print('USERNAME DOES NOT EXIST')
+
+
+	elif choice == 2:
+
+	else :
+		print('INVALID OPTION')
 
 
 
@@ -45,8 +97,10 @@ elif ans == 3:
 
 
 elif ans == 0:
-#search if value exists in the database
-	search = "njehfnga" #enter search value here(need to change to user input)
+
+	search = input('Enter name to search')
+	#search if value exists in the database
+	#search = "njehfnga" #enter search value here(need to change to user input)
 
 
 	sqlSEARCH = "SELECT UserID,user_Name , Password FROM `userName_Password` WHERE user_Name like  %s "  
@@ -56,6 +110,7 @@ elif ans == 0:
 
 	if val == 1:
 		print('value found')
+
 	else:
 		print('value was not found')
 
