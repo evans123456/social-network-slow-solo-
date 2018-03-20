@@ -1,2 +1,5 @@
 # social-network-slow-solo-
-please dont edit , can download but dont edit .... 
+
+no name yet 
+try imitate a web app in future currently doing the behind
+mostly learning purposes
